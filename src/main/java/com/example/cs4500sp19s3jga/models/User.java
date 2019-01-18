@@ -5,6 +5,15 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private Integer id;
+	private Book[] books;
+	public User() {}
+	public User(Integer i, String username, String firstName, String lastName) {
+		this.id = i;
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -28,5 +37,11 @@ public class User {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }
