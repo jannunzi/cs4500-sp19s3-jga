@@ -11,7 +11,7 @@ import com.example.cs4500sp19s3jga.models.User;
 
 public interface ServiceRepository extends CrudRepository<Service, Integer> {
 	@Query(value="SELECT service FROM Service service")
-	public List<User> findAllServices();
+	public List<Service> findAllServices();
 	@Query(value="SELECT service FROM Service service WHERE service.id=:id")
-	public User findServiceById(@Param("id") Integer id);
+	public Service findServiceById(@Param("id") Integer id);
 }
