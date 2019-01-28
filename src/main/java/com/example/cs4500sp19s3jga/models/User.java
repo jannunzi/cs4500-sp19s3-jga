@@ -1,5 +1,7 @@
 package com.example.cs4500sp19s3jga.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +19,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String role;
+	private List<Address> addresses;
 	public User() {}
 	public User(Integer i, String username, String firstName, String lastName) {
 		this.id = i;
@@ -59,5 +62,11 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 }
