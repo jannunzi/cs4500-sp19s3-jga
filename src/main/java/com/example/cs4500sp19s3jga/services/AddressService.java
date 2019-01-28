@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cs4500sp19s3jga.models.Address;
+import com.example.cs4500sp19s3jga.models.User;
 import com.example.cs4500sp19s3jga.repositories.AddressRepository;
 import com.example.cs4500sp19s3jga.repositories.UserRepository;
 
@@ -17,6 +20,14 @@ public class AddressService {
 	AddressRepository addressRepository;
 	@Autowired
 	UserRepository userRepository;
+	@PostMapping("/api/users/{userId}/addresses")
+	public Address addAddressToUser(
+			@PathVariable("userId") Integer id,
+			@RequestBody Address address) {
+		User user = userRepository.findUserById(id);
+		address.setUser(user);
+		return addressRepository.save(address);
+	}
 	@GetMapping("/api/users/{userId}/addresses")
 	public List<Address> findAddressesForUser(
 			@PathVariable("userId") Integer userId) {
