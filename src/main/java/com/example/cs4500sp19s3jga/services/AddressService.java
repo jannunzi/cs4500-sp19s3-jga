@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,18 @@ public class AddressService {
 	AddressRepository addressRepository;
 	@Autowired
 	UserRepository userRepository;
+	@PutMapping("/api/addresses/{id}")
+	public Address updateAddress(
+			@PathVariable("id") Integer id,
+			@RequestBody Address newAddress) {
+		Address address = addressRepository.findAddressById(id);
+		address.setStreet1(newAddress.getStreet1());
+		address.setStreet2(newAddress.getStreet2());
+		address.setCity(newAddress.getCity());
+		address.setState(newAddress.getState());
+		address.setCountry(newAddress.getCountry());
+		return addressRepository.save(address);
+	}
 	@PostMapping("/api/users/{userId}/addresses")
 	public Address addAddressToUser(
 			@PathVariable("userId") Integer id,
